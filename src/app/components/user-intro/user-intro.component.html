@@ -1,0 +1,124 @@
+<div class="px-16 py-10">
+
+  @if(user){
+    <!-- repos and followers number -->
+    <div class="flex flex-col md:flex-row gap-2 justify-between">
+<!-- Repos  -->
+      <div class="flex gap-4 py-4 px-10 bg-white rounded-md">
+        <div class="rounded-full size-12 bg-rose-200 flex items-center justify-center">
+          <mat-icon class="text-rose-500">book_2</mat-icon>
+        </div>
+        <div class="flex flex-col">
+          <span class="text-bold text-2xl -mb-2">  {{user.public_repos}} </span>
+          <span class="text-gray-500">Repos</span>
+        </div>
+      </div>
+
+      <!-- Followers -->
+
+      <div class="flex gap-4 py-4 px-10 bg-white rounded-md">
+        <div class="rounded-full size-12 bg-green-200 flex items-center justify-center">
+          <mat-icon class="text-green-500">group</mat-icon>
+        </div>
+        <div class="flex flex-col">
+          <span class="text-bold text-2xl -mb-2">  {{user.followers}} </span>
+          <span class="text-gray-500">Followers</span>
+        </div>
+      </div>
+
+      <!-- Following -->
+
+      <div class="flex gap-4 py-4 px-10 bg-white rounded-md">
+        <div class="rounded-full size-12 bg-purple-200 flex items-center justify-center">
+          <mat-icon class="text-purple-500">person_add</mat-icon>
+        </div>
+        <div class="flex flex-col">
+          <span class="text-bold text-2xl -mb-2">  {{user.following}} </span>
+          <span class="text-gray-500">Following</span>
+        </div>
+      </div>
+
+      <!-- Gist -->
+
+      <div class="flex gap-4 py-4 px-10 bg-white rounded-md">
+        <div class="rounded-full size-12 bg-yellow-200 flex items-center justify-center">
+          <mat-icon class="text-yellow-500">code</mat-icon>
+        </div>
+        <div class="flex flex-col">
+          <span class="text-bold text-2xl -mb-2">  {{user.public_gists}} </span>
+          <span class="text-gray-500">Gist</span>
+        </div>
+      </div>
+
+      <!-- next -->
+    </div>
+
+    <div class="my-8 grid grid-cols-1 md:grid-cols-2 gap-4">
+      <!-- user  -->
+      <div class="bg-white p-4 rounded-md cursor-pointer"  (click)="navigate()">
+        <h2>User</h2>
+        <div class="flex gap-2 items-center">
+          <div>
+            <img [src]="user.avatar_url" alt="User" class="size-16 rounded-full"/>
+          </div>
+          <div class="flex flex-col gap-2">
+            <span class="text-bold text-xl leading-none -mb-3">{{user.name}}</span>
+            <span class="text-lg text-gray-500">&#64;{{user.login}} </span>
+          </div>
+        </div>
+        <div>
+          <div class="text-gray-500">
+
+        <p>{{user.bio}}</p>
+        <div class="flex gap-2 items-center">
+                      @if(user.location){
+
+            <mat-icon>location_on</mat-icon>
+            <span>{{user.location}}</span>
+          }
+          </div>
+        <div class="flex gap-2 items-center">
+            <mat-icon>home_work</mat-icon>
+            @if(user.company){
+              <span>{{user.location}}</span>
+            } @else {
+              <span>Not joined yet</span>
+
+            }
+          </div>
+
+          <p class="mt-4">Read More..</p>
+          </div>
+
+
+        </div>
+      </div>
+      @if(followers){
+
+      <div class="bg-white p-4 rounded-md overflow-y-auto max-h-[50vh]">
+        <h2>Followers</h2>
+<div class="flex flex-col gap-4">
+        @for (follower of followers; track follower.id) {
+            <a class="flex gap-2 items-center cursor-pointer" [href]="follower.html_url" target="_blank">
+          <div>
+            <img [src]="follower.avatar_url" alt="User" class="size-12 rounded-full"/>
+          </div>
+          <div class="flex flex-col gap-2">
+            <span class="text-bold text-lg leading-none -mb-2">{{follower.login | titlecase}}</span>
+            <span class="text-sm text-gray-500">{{follower.html_url}} </span>
+          </div>
+        </a>
+        }
+        </div>
+      </div>
+      }
+
+    </div>
+  } @else {
+    <p></p>
+  }
+
+@if(error){
+  <p class="text-red-500">{{error}}</p>
+}
+</div>

@@ -1,0 +1,70 @@
+<div class="bg-gray-200 min-h-screen">
+
+<div class="container space-y-6">
+<!-- search bar -->
+  <div class="max-w-md mx-auto">
+    <div class="relative">
+      <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+        <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+        </svg>
+      </div>
+      <input
+      (change)="onChange($event)"
+        type="search" id="default-search" class="block w-full p-4 ps-10 text-sm bg-gray-900 border border-gray-300 rounded-lg text-gray-50 focus:ring-0 focus:border-none focus:outline-none" placeholder="Eg: johndoe" />
+
+        <button (click)="searchUser()" type="submit" class="text-white absolute end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Search</button>
+    </div>
+  </div>
+
+<!-- search result  -->
+<!-- <app-user-intro [error]="error" [user]="user" [followers]="userFollowers"></app-user-intro> -->
+<div class="flex justify-center">
+@if(user){
+  <div class="bg-white p-4 rounded-md cursor-pointer w-[90vw] md:w-[60vw]"  (click)="navigate()">
+        <h2>User</h2>
+        <div class="flex gap-2 items-center">
+          <div>
+            <img [src]="user.avatar_url" alt="User" class="size-16 rounded-full"/>
+          </div>
+          <div class="flex flex-col gap-2">
+            <span class="text-bold text-xl leading-none -mb-3">{{user.name}}</span>
+            <span class="text-lg text-gray-500">&#64;{{user.login}} </span>
+          </div>
+        </div>
+        <div>
+          <div class="text-gray-500">
+
+        <p>{{user.bio}}</p>
+        <div class="flex gap-2 items-center">
+          @if(user.location){
+
+            <mat-icon>location_on</mat-icon>
+            <span>{{user.location}}</span>
+          }
+          </div>
+        <div class="flex gap-2 items-center">
+            <mat-icon>home_work</mat-icon>
+            @if(user.company){
+              <span>{{user.location}}</span>
+            } @else {
+              <span>Not joined yet</span>
+
+            }
+          </div>
+
+                    <p class="mt-4">Read More..</p>
+
+          </div>
+
+
+        </div>
+      </div>
+    }@else {
+      <p class="text-red-500">{{error}}</p>
+    }
+
+</div>
+</div>
+
+</div>

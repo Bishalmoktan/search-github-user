@@ -1,0 +1,8 @@
+<div class="bg-gray-200 min-h-screen">
+  <app-user-intro [error]="error" [user]="user" [followers]="userFollowers"></app-user-intro>
+  <div class="px-16 grid grid-cols-1 md:grid-cols-2 gap-4">
+    <app-pie-chart class="bg-white rounded-md p-4" [data]="languages"></app-pie-chart>
+    <app-bar-chart class="bg-white rounded-md p-4" [data]="forks"></app-bar-chart>
+    <app-doughnut class="bg-white rounded-md p-4" [data]="mostPopular"></app-doughnut>
+  </div>
+</div>
